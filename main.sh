@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
-
 installation_script="$(mktemp)"
 curl -sSL https://install.python-poetry.org/ --output "$installation_script"
 
 if [ "${RUNNER_OS}" == "Windows" ]; then
-  path="C:\Users\runneradmin\AppData\Roaming\Python/Scripts"
+  path="C:/Users/runneradmin/AppData/Roaming/Python/Scripts"
 else
   path="$HOME/.local"
 fi
@@ -17,11 +15,8 @@ echo -e "\033[33mInstalling Poetry 👷\033[0m\n"
 echo "ECHO 0"
 
 if [ "${VERSION}" == "latest" ]; then
-  # Note: If we quote installation arguments, the call below fails
-  # shellcheck disable=SC2086
   POETRY_HOME=$path python3 ${installation_script} --yes ${INSTALLATION_ARGUMENTS}
 else
-  # shellcheck disable=SC2086
   POETRY_HOME=$path python3 ${installation_script} --yes --version=${VERSION} ${INSTALLATION_ARGUMENTS}
 fi
 
