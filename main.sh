@@ -14,6 +14,8 @@ fi
 echo -e "\n\033[33mSetting Poetry installation path as $path\033[0m\n"
 echo -e "\033[33mInstalling Poetry 👷\033[0m\n"
 
+echo "ECHO 0"
+
 if [ "${VERSION}" == "latest" ]; then
   # Note: If we quote installation arguments, the call below fails
   # shellcheck disable=SC2086
@@ -23,8 +25,12 @@ else
   POETRY_HOME=$path python3 ${installation_script} --yes --version=${VERSION} ${INSTALLATION_ARGUMENTS}
 fi
 
+echo "ECHO 0.1"
+
 echo "$path/bin" >>"$GITHUB_PATH"
 export PATH="$path/bin:$PATH"
+
+echo "ECHO 0.2"
 
 if [ "${RUNNER_OS}" == "Windows" ]; then
   poetry_="$path/bin/poetry.exe"
@@ -32,9 +38,11 @@ else
   poetry_=poetry
 fi
 
-echo "START Test Poetry"
+
+echo "ECHO 0.3"
 $poetry_
-echo "END Test Poetry"
+
+echo "ECHO 0.4"
 
 # Expand any "~" in VIRTUALENVS_PATH
 VIRTUALENVS_PATH="${VIRTUALENVS_PATH/#\~/$HOME}"
