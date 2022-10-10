@@ -32,19 +32,38 @@ else
   poetry_=poetry
 fi
 
+echo "START Test Poetry"
+$poetry_
+echo "END Test Poetry"
+
 # Expand any "~" in VIRTUALENVS_PATH
 VIRTUALENVS_PATH="${VIRTUALENVS_PATH/#\~/$HOME}"
 
+echo "ECHO 1"
+
 $poetry_ config experimental.new-installer false
+
+echo "ECHO 2"
+
 $poetry_ config virtualenvs.create ${VIRTUALENVS_CREATE}
+
+echo "ECHO 3"
+
 $poetry_ config virtualenvs.in-project ${VIRTUALENVS_IN_PROJECT}
+
+echo "ECHO 4"
+
 $poetry_ config virtualenvs.path ${VIRTUALENVS_PATH}
+
+echo "ECHO 5"
 
 config="$($poetry_ config --list)"
 
 if echo "$config" | grep -q -c "installer.parallel"; then
   $poetry_ config installer.parallel ${INSTALLER_PARALLEL}
 fi
+
+echo "ECHO 6"
 
 if [ "${RUNNER_OS}" == "Windows" ]; then
   act="source .venv/scripts/activate"
