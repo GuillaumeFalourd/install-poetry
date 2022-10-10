@@ -35,6 +35,7 @@ fi
 # Expand any "~" in VIRTUALENVS_PATH
 VIRTUALENVS_PATH="${VIRTUALENVS_PATH/#\~/$HOME}"
 
+$poetry_ config experimental.new-installer false
 $poetry_ config virtualenvs.create ${VIRTUALENVS_CREATE}
 $poetry_ config virtualenvs.in-project ${VIRTUALENVS_IN_PROJECT}
 $poetry_ config virtualenvs.path ${VIRTUALENVS_PATH}
