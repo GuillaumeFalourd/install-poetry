@@ -6,11 +6,8 @@ installation_script="$(mktemp)"
 curl -sSL https://install.python-poetry.org/ --output "$installation_script"
 
 if [ "${RUNNER_OS}" == "Windows" ]; then
-  echo "ECHO WINDOWS"
-  path="C:/Users/runneradmin/AppData/Roaming/Python/Scripts"
+  path="C:\Users\runneradmin\AppData\Roaming\Python/Scripts"
 else
-  echo "ECHO NOT WINDOWS"
-  echo ${RUNNER_OS}
   path="$HOME/.local"
 fi
 
